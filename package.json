@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "start": "node ."
+    },
+    "dependencies": {
+        "bcrypt": "^3.0.7",
+        "discord.io": "github:woor/discord.io#gateway_v6",
+        "dotenv": "^8.2.0"
+    },
+    "devDependencies": {
+        "eslint": "^6.6.0",
+        "eslint-plugin-import": "^2.18.2"
+    }
+}

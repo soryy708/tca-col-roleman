@@ -1,0 +1,8 @@
+node_modules/
+build/
+db.sqlite
+.env
+log.txt
+secrets.txt
+secrets_iv.txt
+config.json
