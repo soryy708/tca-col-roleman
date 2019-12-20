@@ -3,7 +3,6 @@ require('dotenv').config();
 const Discord = require('discord.io');
 const commands = require('./commands');
 const logUtil = require('./util/log');
-const stateFileUtil = require('./util/stateFile');
 
 let currentCommandId = 0;
 function getCommandId() {
@@ -20,8 +19,7 @@ bot.on('ready', (evt) => {
 });
 
 bot.on('message', async (userName, userId, channelId, message, evt) => {
-    const config = await stateFileUtil.getState('config.json');
-    if (message.startsWith((config && config.prefix) || '!')) {
+    if (message.startsWith(process.env.COMMAND_PREFIX || '!')) {
         const args = message.substring(1).split(' ');
         const cmd = args[0];
         

@@ -34,7 +34,7 @@ router.command('grant-rank', ['Rank Index', 'Person'], 'Change "Person"s nicknam
 
     const rankIndex = args[1];
     const person = args.slice(2).join(' ');
-    const isAuthenticated = await auth.isAuthenticated(userId);
+    const isAuthenticated = auth.isAuthenticated(userId);
     if (!isAuthenticated) {
         bot.sendMessage({
             to: channelId,

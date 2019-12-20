@@ -2,8 +2,6 @@ const Router = require('./router');
 
 const router = new Router();
 
-router.use(require('./auth'));
-router.use(require('./config'));
 router.use(require('./grantRank'));
 router.use(require('./help'));
 

@@ -1,4 +1,3 @@
-const stateFileUtil = require('../util/stateFile');
 const Router = require('./router');
 
 const router = new Router();
@@ -31,8 +30,7 @@ router.command('help', [], 'Show this message', async (bot, userName, userId, co
         };
     })();
 
-    const config = await stateFileUtil.getState('config.json');
-    const commandPrefix = (config && config.prefix) || '!';
+    const commandPrefix = process.env.COMMAND_PREFIX || '!';
 
     function printTree(node, depth = 0, name = '') {
         function commandsToDescrptions(commands) {

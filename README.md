@@ -10,15 +10,6 @@ This [Discord](https://discordapp.com/) bot changes the Discord users nickname t
 * The bot reacts to commands issued to it. You can issue it commands through DM, or by writing the command in any channel the bot is in.
 * For a full list of available commands, use the `!help` command.
 
-## Files
-
-The bot creates, reads, and writes to files on the file system in order to work.
-Make sure it is able to do so.
-
-* `secrets.txt`: An encrypted file storing credentials, like those used to authenticate with the bot or with TeamSpeak.
-* `secrets_iv.txt`: An "initialization vector" for the encryption of `secrets.txt`. Deleting this will corrupt `secrets.txt` and make its content irrecoverable.
-* `config.json`: Stores non-sensitive configuration information.
-
 ---
 
 # Contributing
