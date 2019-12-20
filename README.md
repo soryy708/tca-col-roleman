@@ -27,3 +27,4 @@ This [Discord](https://discordapp.com/) bot changes the Discord users nickname t
 2. Get a token and a client ID
 3. Place the token in your environment variables as `DISCORD_TOKEN`
 4. Navigate to `https://discordapp.com/oauth2/authorize?&client_id=YOUR_CLIENT_ID&scope=bot&permissions=469764096` (replace `YOUR_CLIENT_ID` with the client ID of the Discord application)
+5. Make yourself authenticated by adding your Discord User ID to an array in your environment variables called ADMINS.
