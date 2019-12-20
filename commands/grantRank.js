@@ -1,6 +1,7 @@
 const auth = require('../util/auth');
 const logUtil = require('../util/log');
 const Router = require('./router');
+const discordUtil = require('../util/discord');
 
 const router = new Router();
 
@@ -74,6 +75,50 @@ router.command('grant-rank', ['Rank Index', 'Person'], 'Change "Person"s nicknam
             resolve(res);
         });
     });
+
+    const server = bot.servers[serverId];
+    const relevantServerRoles = Object.values(server.roles).filter(serverRole => {
+        return ranks.reduce((prev, rank) => (prev || serverRole.name.includes(rank)), false);
+    });
+    const serverRoles = relevantServerRoles.map(serverRole => [serverRole.name, serverRole.id]);
+    const currentRoleIds = server.members[targetUserId].roles;
+    const removedRoleIds = currentRoleIds.filter(roleId => {
+        return serverRoles.reduce((prev, [serverRoleName, serverRoleId]) => (prev || serverRoleId === roleId), false);
+    });
+    const filteredRoleIds = currentRoleIds.filter(roleId => {
+        return !removedRoleIds.reduce((prev, removedRoleId) => (prev || removedRoleId === roleId), false);
+    });
+    let role = serverRoles.find(([roleName]) => roleName.includes(rankName));
+    if (!role) {
+        role = await (async()=>{
+            const createdRole = await new Promise((resolve, reject) => {
+                bot.createRole(serverId, (error, res) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    resolve(res);
+                });
+            });
+            await new Promise((resolve, reject) => {
+                bot.editRole({
+                    serverID: serverId,
+                    roleID: createdRole.id,
+                    name: rankName,
+                    color: '#4eb146',
+                    hoist: false,
+                    mentionable: false,
+                }, (error, res) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    resolve(res);
+                });
+            });
+            return [rankName, createdRole.id];
+        })();
+    }
+    const newRoles = filteredRoleIds.concat(role[1]);
+    await discordUtil.setUserRoles(serverId, targetUserId, newRoles);
     
     bot.sendMessage({
         to: channelId,
