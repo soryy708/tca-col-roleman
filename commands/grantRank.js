@@ -5,7 +5,7 @@ const discordUtil = require('../util/discord');
 
 const router = new Router();
 
-const ranks = [
+const ranks = (process.env.RANKS && JSON.parse(process.env.RANKS)) || [
     '[CA - ❱]',
     '[CA - ❱❱]',
     '[CA - ❱❱❱]',
