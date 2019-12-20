@@ -45,7 +45,7 @@ router.command('grant-rank', ['Rank Index', 'Person'], 'Change "Person"s nicknam
     if (rankIndex < 0 || rankIndex >= ranks.length) {
         bot.sendMessage({
             to: channelId,
-            message: `Invalid \`Rank Index\`. Has to be in range: [${0}-${ranks.length}].`,
+            message: `Invalid \`Rank Index\`. Has to be in range: [${0}-${ranks.length - 1}].`,
         });
         return;
     }
